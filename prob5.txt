@@ -1,0 +1,17 @@
+1. create ec2 instances – they should be in the same subnet and have the same security group
+
+2. Open ports between them – make sure instances can communicate to each other. Use the default security group which has one rule relevant for this case:
+        Type: All Traffic
+        Source: Custom – id of the security group
+
+3.Log in to the instance you want to connect from to the other instance
+    	
+4.ssh-keygen -t rsa -N "" -f /home/ubuntu/.ssh/id_rsa
+
+5.Copy your private AWS key as ~/.ssh/my.key (or whatever name you want to use)
+    	
+6.chmod 600 .ssh/my.key
+	
+7.cat ~/.ssh/id_rsa.pub | ssh -i ~/.ssh/my.key ubuntu@ip_of_2nd "cat >> ~/.ssh/authorized_keys"
+
+8.ssh ip_of_2nd
